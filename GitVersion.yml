@@ -15,7 +15,7 @@ branches:
     tag: beta
     increment: Minor
     is-source-branch-for:
-      - aterna
+      - main
     tracks-release-branches: false
     is-release-branch: true
 merge-message-formats:
