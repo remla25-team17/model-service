@@ -1,23 +1,14 @@
 # GitVersion.yml
-mode: Mainline
+mode: ContinuousDeployment
 commit-message-incrementing: Enabled
 branches:
   main:
-    regex: ^main$
+    regex: ^aterna.*
+    tag: pre
     increment: Patch # Default to patch release
     prevent-increment-of-merged-branch-version: true
     track-merge-target: false
-    is-source-branch-for:
-      - release
     is-mainline: true
-  release:
-    regex: ^release[/-]
-    tag: beta
-    increment: Patch
-    is-source-branch-for:
-      - main
-    tracks-release-branches: false
-    is-release-branch: true
 merge-message-formats:
   # Auto-detects increment type from commits
   major: '#major'
