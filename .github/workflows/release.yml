@@ -8,8 +8,15 @@ on:
 jobs:
   tag-release:
     name: Generate Release
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     steps:
+      - name: Create GitHub App Token
+        id: generate-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+        - run: "echo 'The created token is masked: ${{ steps.create_token.outputs.token }}'"
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -30,3 +37,5 @@ jobs:
           name: Release ${{ steps.gitversion.outputs.semVer }}
           generate_release_notes: true
           prerelease: true
+         env:
+          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
