@@ -1,0 +1,28 @@
+tags:
+  - Prediction
+summary: Perform sentiment prediction
+parameters:
+  - name: input
+    in: body
+    required: true
+    schema:
+      type: object
+      properties:
+        text:
+          type: string
+          example: "The food was great!"
+      required:
+        - text
+responses:
+  200:
+    description: Sentiment prediction result
+    schema:
+      type: object
+      properties:
+        prediction:
+          type: boolean
+          example: true
+  400:
+    description: Invalid input
+  500:
+    description: Internal error during prediction

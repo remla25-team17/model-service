@@ -1,0 +1,5 @@
+Flask
+flasgger
+joblib
+requests
+git+https://github.com/remla25-team17/lib-ml.git@v0.0.3
