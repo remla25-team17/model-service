@@ -4,7 +4,7 @@
 
 Please review and check all the following:
 
-- [ ] I have added an overview the changes
+- [ ] I have added an overview of the changes
 - [ ] I have tested my changes locally
 - [ ] I have updated documentation (if applicable)
 
