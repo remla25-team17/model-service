@@ -1,5 +1,5 @@
 # GitVersion.yml
-mode: ContinuousDeployment
+mode: Mainline
 commit-message-incrementing: Enabled
 branches:
   main:
@@ -7,8 +7,6 @@ branches:
     increment: Patch # Default to patch release
     prevent-increment-of-merged-branch-version: true
     track-merge-target: false
-    is-source-branch-for:
-      - release
     is-mainline: true
   release:
     regex: ^develop[/-]
