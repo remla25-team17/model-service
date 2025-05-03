@@ -8,11 +8,12 @@ on:
 jobs:
   tag-release:
     name: Generate Release
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # required by GitVersion
+          fetch-depth: 0
       - name: Install GitVersion
         uses: gittools/actions/gitversion/setup@v3.2.1
         with:
