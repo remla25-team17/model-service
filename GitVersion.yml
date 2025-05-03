@@ -3,7 +3,7 @@ mode: Mainline
 commit-message-incrementing: Enabled
 branches:
   main:
-    regex: ^aterna/gitversioning$
+    regex: ^aterna$
     increment: Patch # Default to patch release
     prevent-increment-of-merged-branch-version: true
     track-merge-target: false
@@ -15,7 +15,7 @@ branches:
     tag: beta
     increment: Minor
     is-source-branch-for:
-      - aterna/gitversioning
+      - aterna
     tracks-release-branches: false
     is-release-branch: true
 merge-message-formats:
