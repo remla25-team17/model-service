@@ -16,7 +16,6 @@ jobs:
         with:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
-        - run: "echo 'The created token is masked: ${{ steps.create_token.outputs.token }}'"
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -37,5 +36,5 @@ jobs:
           name: Release ${{ steps.gitversion.outputs.semVer }}
           generate_release_notes: true
           prerelease: true
-         env:
+        env:
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
