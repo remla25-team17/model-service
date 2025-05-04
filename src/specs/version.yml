@@ -1,0 +1,14 @@
+summary: Get model service version
+tags:
+  - Version
+responses:
+  200:
+    description: Returns the version of the model-service
+    schema:
+      type: object
+      properties:
+        model_service_version:
+          type: string
+          example: "1.0.0"
+  500:
+    description: Server error retrieving version
