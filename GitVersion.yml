@@ -9,7 +9,6 @@ branches:
     regex: ^develop([/-].*)?$
     tag: canary
     increment: Patch
-    is-release-branch: true
     track-merge-target: true
 merge-message-formats:
   # Auto-detects increment type from commits
