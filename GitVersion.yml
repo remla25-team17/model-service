@@ -1,4 +1,3 @@
-# GitVersion.yml
 mode: Mainline
 commit-message-incrementing: Enabled
 branches:
@@ -12,8 +11,6 @@ branches:
     regex: ^develop[/-]
     tag: canary
     increment: Patch
-    is-source-branch-for:
-      - main
     track-merge-target: false
     prevent-increment-of-merged-branch-version: true
     tracks-release-branches: false

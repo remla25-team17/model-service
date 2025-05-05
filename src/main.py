@@ -31,14 +31,14 @@ def download_model():
         except Exception as e:
             raise RuntimeError(f"Failed to download model: {e}")
 
-download_model()
-model = joblib.load(MODEL_PATH)
+#download_model()
+#model = joblib.load(MODEL_PATH)
 
 @app.route('/api/sentiment', methods=['POST'])
 @swag_from("specs/predict.yml")
 def predict():
     """Predict sentiment of the input text"""
-
+    
     # Check if the request contains JSON data and the 'text' field is not empty
     data = request.get_json()
     if not data or 'text' not in data or not data['text'].strip():
@@ -60,7 +60,6 @@ def version():
     return jsonify({'model_service_version': model_version})
 
 if __name__ == "__main__":
-
     # Defining the listening port and host of the model service through environment variables
     port = int(os.getenv("PORT", 8080)) 
     host = str(os.getenv("HOST", "0.0.0.0"))
