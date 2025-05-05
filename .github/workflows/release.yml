@@ -40,7 +40,7 @@ jobs:
     name: Generate Release
     runs-on: ubuntu-latest
     outputs:
-      tag: ${{ steps.gitversion.outputs.majorMinorPatch }}
+      tag: ${{ steps.latest_stable.outputs.tag }}
     steps:
       - name: Create GitHub App Token
         id: generate-token
@@ -74,4 +74,10 @@ jobs:
           target_commitish: ${{ github.sha }}
           generate_release_notes: true
           prerelease: ${{ contains(steps.gitversion.outputs.semVer, '-') }}
-        
+      - name: Get latest stable release tag
+        id: latest_stable
+        run: |
+          git fetch --tags
+          TAG=$(git tag --sort=-v:refname | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' | head -n 1)
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+              
