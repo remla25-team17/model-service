@@ -54,6 +54,8 @@ jobs:
           token: ${{ steps.generate-token.outputs.token }}
           persist-credentials: false
           fetch-depth: 0
+      - name: Fetch all branches
+        run: git fetch --all --tags
       - name: Install GitVersion
         uses: gittools/actions/gitversion/setup@v3.2.1
         with:

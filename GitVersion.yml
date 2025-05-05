@@ -1,4 +1,3 @@
-# GitVersion.yml
 mode: Mainline
 commit-message-incrementing: Enabled
 branches:
