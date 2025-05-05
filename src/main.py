@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify
 from flasgger import Swagger, swag_from
-from lib_ml.preprocessing import preprocessing
-import joblib
+from lib_ml.preprocessing import preprocess_reviews
 import requests
 import os
 
