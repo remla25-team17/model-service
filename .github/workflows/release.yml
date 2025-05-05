@@ -40,7 +40,7 @@ jobs:
     name: Generate Release
     runs-on: ubuntu-latest
     outputs:
-      tag: ${{ steps.gitversion.outputs.semVer }}
+      tag: ${{ steps.gitversion.outputs.majorMinorPatch }}
     steps:
       - name: Create GitHub App Token
         id: generate-token
@@ -71,6 +71,6 @@ jobs:
           token: ${{ steps.generate-token.outputs.token }}
           tag_name: ${{ steps.gitversion.outputs.semVer }}
           name: Release ${{ steps.gitversion.outputs.semVer }}
-          generate_release_notes: true
+          body: ${{ steps.gitversion.outputs.changelog }}
           prerelease: ${{ contains(steps.gitversion.outputs.semVer, '-') }}
         

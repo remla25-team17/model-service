@@ -4,7 +4,7 @@ branches:
   main:
     regex: ^main$
     increment: Patch
-    is-mainline: false
+    is-mainline: true
   develop:
     regex: ^develop([/-].*)?$
     tag: canary
