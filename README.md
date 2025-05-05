@@ -1,6 +1,6 @@
 # Sentiment Analysis Service
 
-A simple Flask API for **sentiment analysis**. The service acesses a machine learning model that predicts the sentiment of input text (e.g., positive/negative/neutral).
+A simple Flask API for **sentiment analysis**. The service uploads a machine learning model that predicts the sentiment of input text.
 
 
 ## 📚 Table of Contents
@@ -88,7 +88,7 @@ docker build -t sentiment-service .
 
 - `docker build`: This command tells Docker to create an image from the Dockerfile in the current directory.
 
-- `-t` sentiment-service: The -t flag tags the image with the name sentiment-service so it's easier to reference later.
+- `-t`: sentiment-service: The -t flag tags the image with the name sentiment-service so it's easier to reference later.
 
 - `.`: The . specifies the build context, meaning Docker will use the current directory (which should contain your Dockerfile and app code) to build the image.
 
@@ -111,8 +111,7 @@ docker run -p 8080:8080 sentiment-service
 
 - **Build & Push:**
     - Every push to `main` or `develop/**` triggers GitHub Actions. 
-    - The Docker image is built and pushed to:  
-      `ghcr.io/remla25-team17/model-service:<version>`
+    - The Docker image is built and pushed to:  `ghcr.io/remla25-team17/model-service:<version>`
 
 - **GitHub App Authentication**
 
@@ -124,7 +123,7 @@ docker run -p 8080:8080 sentiment-service
 
 - **Versioning:**
     - We use **GitVersion** to handle versioning automatically. GitVersion analyzes the repository’s Git history and branch structure to generate a **semantic version number** (SemVer) without needing manual tagging.
-    - This ensures that every build and release is consistently versioned, reducing human error and making versioning fully traceable to Git history. Moreover, it is fully automatic: commit messages simply need to specify if it is a major/minor/patch(default) increase and `GitVersion.yml` will automatically calculate the release version.
+    - This ensures that every build and release is consistently versioned, reducing human error and making versioning fully traceable to Git history. Moreover, it is fully automatic: commit messages simply need to specify if it is a major/minor/patch(default) and `GitVersion.yml` will automatically calculate the release version.
     - For example:
         - Merges to `main` bump a stable version (e.g., `1.0.0`).
         - Builds from feature branches or pre-release branches (i.e., `develop`) are marked as **pre-releases** (e.g., `1.1.0-canary.5`), making it clear they're not production-ready. The counter at the end of the pre-release version signifies the current number of a pre-release.
