@@ -1,15 +1,20 @@
-mode: ContinuousDeployment
+mode: Mainline
 commit-message-incrementing: Enabled
 branches:
   main:
     regex: ^main$
-    increment: Patch
+    increment: Patch # Default to patch release
+    prevent-increment-of-merged-branch-version: true
+    track-merge-target: false
     is-mainline: true
-  develop:
-    regex: ^develop([/-].*)?$
+  release:
+    regex: ^develop[/-]
     tag: canary
     increment: Patch
-    track-merge-target: true
+    track-merge-target: false
+    prevent-increment-of-merged-branch-version: true
+    tracks-release-branches: false
+    is-release-branch: true
 merge-message-formats:
   # Auto-detects increment type from commits
   major: '#major'
