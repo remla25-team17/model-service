@@ -14,7 +14,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy your source code
-COPY src/ .
+COPY src/ /app/
 
 # Expose port
 EXPOSE 8080
@@ -23,10 +23,5 @@ EXPOSE 8080
 ARG MODEL_SERVICE_VERSION=0.0.0
 ENV MODEL_SERVICE_VERSION=${MODEL_SERVICE_VERSION}
 
-# Set environment variables for Flask
-ENV FLASK_APP=main.py
-ENV PORT=8080
-ENV HOST=0.0.0.0
-
-# Run Flask using flask run
-CMD ["flask", "run"]
+ENTRYPOINT ["python"]
+CMD ["main.py"]
