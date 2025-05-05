@@ -18,10 +18,15 @@ COPY src/ .
 # Expose port
 EXPOSE 8080
 
+# Model version
+ARG MODEL_SERVICE_VERSION=0.0.0
+ENV MODEL_SERVICE_VERSION=${MODEL_SERVICE_VERSION}
+echo $MODEL_SERVICE_VERSION
+
 # Set environment variables for Flask
 ENV FLASK_APP=main.py
-ENV FLASK_RUN_PORT=8080
-ENV FLASK_RUN_HOST=0.0.0.0
+ENV PORT=8080
+ENV HOST=0.0.0.0
 
 # Run Flask using flask run
 CMD ["flask", "run"]
