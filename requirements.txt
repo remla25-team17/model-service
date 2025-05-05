@@ -2,4 +2,5 @@ Flask
 flasgger
 joblib
 requests
+scikit-learn
 git+https://github.com/remla25-team17/lib-ml.git
