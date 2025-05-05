@@ -48,7 +48,7 @@ download(BAG_OF_WORDS_PATH, BAG_OF_WORDS_URL)
 model = joblib.load(MODEL_PATH)
 bag_of_words = joblib.load(BAG_OF_WORDS_PATH)
 
-@app.route('/api/sentiment', methods=['POST'])
+@app.route('/api/v1/sentiment', methods=['POST'])
 @swag_from("specs/predict.yml")
 def predict():
     """Predict sentiment of the input text"""
@@ -72,7 +72,7 @@ def predict():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/api/version', methods=['GET'])
+@app.route('/api/v1/version', methods=['GET'])
 @swag_from("specs/version.yml")
 def version():
     model_version = os.getenv("MODEL_SERVICE_VERSION", "unknown")

@@ -18,8 +18,8 @@ A simple Flask API for **sentiment analysis**. The service hosts a machine learn
 ## [🚀 Features](#-features)
 
 - **Endpoints**:
-  - `/api/sentiment`: POST endpoint to analyze text sentiment.
-  - `/api/version`: GET endpoint to check the current service version.
+  - `/api/v1/sentiment`: POST endpoint to analyze text sentiment.
+  - `/api/v1/version`: GET endpoint to check the current service version.
 - **Model Auto-Download**: Automatically downloads the model and bag-of-words files if not present locally.
 - **Swagger UI**: Built-in Swagger documentation for easy API exploration.
 - **Containerized**: Fully containerized with Docker for consistent deployment.
