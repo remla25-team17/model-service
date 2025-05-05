@@ -56,7 +56,9 @@ pip install -r requirements.txt
 | Variable                | Description                                               | Default                       |
 |-------------------------|-----------------------------------------------------------|-------------------------------|
 | `MODEL_PATH`            | Path to save/load the model file                          | `model/sentiment_model.pkl`   |
-| `MODEL_URL`             | URL to download the model if not present locally          | *(required if model missing)* |
+| `MODEL_URL`             | URL to download the model if not present locally          | `https://github.com/remla25-team17/model-training/releases/latest/download/model.pkl` |
+| `BAG_OF_WORDS_PATH` | Path to save/load the bag of words file                   | `model/bag_of_words.pkl`      |
+| `BAG_OF_WORDS_URL` | URL to download the bag of words if not present locally | `https://github.com/remla25-team17/model-training/releases/latest/download/bag_of_words.pkl` |
 | `MODEL_SERVICE_VERSION` | Service version (displayed in `/api/version`)             | `unknown`                     |
 | `PORT`                  | Port to run the Flask app                                 | `8080`                        |
 | `HOST`                  | Host to bind the Flask app                                | `0.0.0.0`                     |
