@@ -9,11 +9,13 @@ import numpy as np
 app = Flask(__name__)
 swagger = Swagger(app)
 
-MODEL_PATH = os.getenv("MODEL_PATH", "model/sentiment_model.pkl")
-MODEL_URL = os.getenv("MODEL_URL", "https://github.com/remla25-team17/model-training/releases/latest/download/model.pkl")
+MODEL_SERVICE_VERSION = os.getenv("MODEL_SERVICE_VERSION", "0.1.2")
+
+MODEL_PATH = os.getenv("MODEL_PATH", "model/model.pkl")
+MODEL_URL = os.getenv("MODEL_URL", "https://github.com/remla25-team17/model-training/releases/download/{MODEL_SERVICE_VERSION}/model.pkl").format(MODEL_SERVICE_VERSION=MODEL_SERVICE_VERSION)
 
 BAG_OF_WORDS_PATH = os.getenv("BAG_OF_WORDS_PATH", "model/bag_of_words.pkl")
-BAG_OF_WORDS_URL = os.getenv("BAG_OF_WORDS_URL", "https://github.com/remla25-team17/model-training/releases/latest/download/bag_of_words.pkl")
+BAG_OF_WORDS_URL = os.getenv("BAG_OF_WORDS_URL", "https://github.com/remla25-team17/model-training/releases/download/{MODEL_SERVICE_VERSION}/bag_of_words.pkl").format(MODEL_SERVICE_VERSION=MODEL_SERVICE_VERSION)
         
 def download(save_path, url):
     """
@@ -25,20 +27,20 @@ def download(save_path, url):
     """
     if not os.path.exists(save_path):
         if not url:
-            raise RuntimeError("MODEL_PATH does not exist and MODEL_URL is not set.")
+            raise RuntimeError("Path does not exist and URL is not set.")
         os.makedirs(os.path.dirname(save_path), exist_ok=True)
 
         try:
-            print(f"Downloading model from {url}...")
+            print(f"Downloading from {url}...")
             response = requests.get(url)
             response.raise_for_status()
 
             with open(save_path, "wb") as f:
                 f.write(response.content)
 
-            print("Model downloaded successfully.")
+            print("Download was successful.")
         except Exception as e:
-            raise RuntimeError(f"Failed to download model: {e}")
+            raise RuntimeError(f"Failed to download: {e}")
 
 # Download the model and bag of words if they do not exist
 download(MODEL_PATH, MODEL_URL)
@@ -46,7 +48,7 @@ download(BAG_OF_WORDS_PATH, BAG_OF_WORDS_URL)
 model = joblib.load(MODEL_PATH)
 bag_of_words = joblib.load(BAG_OF_WORDS_PATH)
 
-@app.route('/api/sentiment', methods=['POST'])
+@app.route('/api/v1/sentiment', methods=['POST'])
 @swag_from("specs/predict.yml")
 def predict():
     """Predict sentiment of the input text"""
@@ -70,7 +72,7 @@ def predict():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/api/version', methods=['GET'])
+@app.route('/api/v1/version', methods=['GET'])
 @swag_from("specs/version.yml")
 def version():
     model_version = os.getenv("MODEL_SERVICE_VERSION", "unknown")
@@ -79,5 +81,5 @@ def version():
 if __name__ == "__main__":
     # Defining the listening port and host of the model service through environment variables
     port = int(os.getenv("PORT", 8080)) 
-    host = str(os.getenv("HOST", "0.0.0.0"))
+    host = os.getenv("HOST", "0.0.0.0")
     app.run(host=host, port=port)
