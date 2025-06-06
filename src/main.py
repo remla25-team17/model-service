@@ -9,7 +9,7 @@ import numpy as np
 app = Flask(__name__)
 swagger = Swagger(app)
 
-MODEL_SERVICE_VERSION = os.getenv("MODEL_SERVICE_VERSION", "0.1.2")
+MODEL_SERVICE_VERSION = os.getenv("MODEL_SERVICE_VERSION", "0.1.14")
 
 MODEL_PATH = os.getenv("MODEL_PATH", "model/model.pkl")
 MODEL_URL = os.getenv("MODEL_URL", "https://github.com/remla25-team17/model-training/releases/download/{MODEL_SERVICE_VERSION}/model.pkl").format(MODEL_SERVICE_VERSION=MODEL_SERVICE_VERSION)
