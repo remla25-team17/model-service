@@ -5,6 +5,9 @@ import requests
 import os
 import joblib
 import numpy as np
+from sentence_transformers import SentenceTransformer
+
+model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
 
 app = Flask(__name__)
 swagger = Swagger(app)
@@ -42,9 +45,7 @@ def download(save_path, url):
 
 # Download the model and bag of words if they do not exist
 download(MODEL_PATH, MODEL_URL)
-download(BAG_OF_WORDS_PATH, BAG_OF_WORDS_URL)
 model = joblib.load(MODEL_PATH)
-bag_of_words = joblib.load(BAG_OF_WORDS_PATH)
 
 @app.route('/api/sentiment', methods=['POST'])
 @swag_from("specs/predict.yml")
@@ -59,10 +60,10 @@ def predict():
     try:
         # Preprocess the input text using the lib_ml library and predict sentiment using the loaded model
         preprocessed_data = preprocess_text(data['text'])
-        # Convert the preprocessed text to a numerical format using the bag of words model
-        numerical_data = bag_of_words.transform([preprocessed_data]).toarray()
+        # Convert the preprocessed text to an embedding
+        embedding = model.encode(preprocessed_data)
         # Use the loaded model to predict sentiment
-        prediction = model.predict(numerical_data)
+        prediction = model.predict(embedding)
         # Convert the prediction to a list and extract the first element
         prediction = prediction.tolist()[0]
 
