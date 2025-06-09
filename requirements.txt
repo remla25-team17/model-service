@@ -3,4 +3,5 @@ flasgger
 joblib
 requests
 scikit-learn
+sentence-transformers
 git+https://github.com/remla25-team17/lib-ml.git
