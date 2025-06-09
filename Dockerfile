@@ -1,8 +1,9 @@
-FROM python:3
+# Stage 1: Builder
+FROM python:3 AS builder
+RUN echo "Building the Python environment"
 
 WORKDIR /app
 
-# Install system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     build-essential \
@@ -10,18 +11,19 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 COPY requirements.txt .
 
-# Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir --target=/tmp/deps -r requirements.txt
 
-# Copy your source code
+# Stage 2: Final image
+FROM python:3-slim AS final
+RUN echo "Creating the final image"
+
+WORKDIR /app
+
+# Copy packages and app
+COPY --from=builder /tmp/deps /app/deps
 COPY src/ /app/
 
-# Expose port
-EXPOSE 8080
-
-# Model version
-ARG MODEL_SERVICE_VERSION=0.0.0
-ENV MODEL_SERVICE_VERSION=${MODEL_SERVICE_VERSION}
+ENV PYTHONPATH="/app/deps"
 
 ENTRYPOINT ["python"]
 CMD ["main.py"]

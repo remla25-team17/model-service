@@ -26,7 +26,7 @@ A simple Flask API for **sentiment analysis**. The service hosts a machine learn
 - **CI/CD**:
   - Automated builds and Docker image pushes to **GitHub Container Registry (GHCR)**.
   - **Semantic versioning** with GitVersion.
-
+  - **Multi-stage builds** for efficient Docker images.
 ---
 
 ## [🛠 Requirements](#-requirements)
@@ -70,11 +70,19 @@ pip install -r requirements.txt
 python src/main.py
 ```
 
-The service will be available at:  
-👉 [http://localhost:8080](http://localhost:8080)
-
 Swagger UI is available at:  
 👉 [http://localhost:8080/apidocs](http://localhost:8080/apidocs)
+
+You can test the API using tools like Postman and sending a POST request to:
+```http
+POST 0.0.0.0:8080/api/v1/sentiment
+Content-Type: application/json
+
+{
+  "text": "This is a good restaurant"
+}
+``` 
+Instead of `0.0.0.0:8080/api/v1/sentiment` you can also POST to `localhost:8080/api/v1/sentiment`
 
 ---
 
@@ -99,7 +107,7 @@ docker run -p 8080:8080 --env-file=.env sentiment-service
 ```
 
 - `docker run`: Starts a new container from the `sentiment-service` image.
-- `-p 8080:8080`: Maps port 8080 on your local machine to port 8080 inside the container, making the API accessible at [http://localhost:8080](http://localhost:8080).
+- `-p 8080:8080`: Maps port 8080 on your local machine to port 8080 inside the container, making it able to GET and POST to the service through [http://localhost:8080](http://localhost:8080).
 - `--env-file=.env`: Loads environment variables from the `.env` file.
 - `sentiment-service`: Specifies the image to run.
 
