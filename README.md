@@ -9,6 +9,7 @@ A simple Flask API for **sentiment analysis**. The service hosts a machine learn
 - [🚀 Features](#-features)
 - [🛠 Requirements](#-requirements)
 - [🔧 Local Setup](#-local-setup)
+- [📡 API Endpoints](#-api-endpoints)
 - [📦 Running with Docker](#-running-with-docker)
 - [⚙️ GitHub Actions & CI/CD](#️-github-actions--cicd)
 - [📜 Resources](#-resources)
@@ -73,16 +74,44 @@ python src/main.py
 Swagger UI is available at:  
 👉 [http://localhost:8080/apidocs](http://localhost:8080/apidocs)
 
-You can test the API using tools like Postman and sending a POST request to:
-```http
-POST 0.0.0.0:8080/api/v1/sentiment
-Content-Type: application/json
+---
 
+## [📡 API Endpoints](#-api-endpoints)
+
+You can test the API using tools like Postman and sending request to `0.0.0.0:8080<endpoint>` or `localhost:8080<endpoint>`.
+
+### `POST /api/v1/sentiment`
+
+Analyze sentiment of the given input text.
+
+**Request**:
+
+```json
 {
-  "text": "This is a good restaurant"
+  "text": "The food was good"
 }
-``` 
-Instead of `0.0.0.0:8080/api/v1/sentiment` you can also POST to `localhost:8080/api/v1/sentiment`
+```
+
+**Response**:
+
+```json
+{
+  "sentiment": "1"
+}
+```
+---
+
+### `GET /api/v1/version`
+
+Returns version details of the app and connected model-service.
+
+**Response**:
+
+```json
+{
+  "model_service_version": "0.1.14"
+}
+```
 
 ---
 
